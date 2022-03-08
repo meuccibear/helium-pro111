@@ -8,7 +8,13 @@
 
 package io.renren;
 
+import io.renren.modules.business.dao.BusinessHotspottyDao;
+import io.renren.modules.business.entity.BusinessHotspottyEntity;
+import io.renren.modules.business.service.BusinessWalletService;
+import io.renren.modules.helium.HeliumUtils;
+import io.renren.modules.helium.domain.Device;
 import io.renren.service.DynamicDataSourceTestService;
+import lombok.SneakyThrows;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +32,13 @@ public class DynamicDataSourceTest {
     @Autowired
     private DynamicDataSourceTestService dynamicDataSourceTestService;
 
+    @Autowired
+    BusinessHotspottyDao businessHotspottyDao;
+
+    @Autowired
+    private BusinessWalletService businessWalletService;
+
+
     @Test
     public void test(){
         Long id = 1L;
@@ -34,5 +47,26 @@ public class DynamicDataSourceTest {
         dynamicDataSourceTestService.updateUserBySlave1(id);
         dynamicDataSourceTestService.updateUserBySlave2(id);
     }
+
+
+    @SneakyThrows
+    @Test
+    /**
+     * 循环爬取钱包设备
+     */
+    public void crawlingData(){
+//        businessWalletService.crawlingDatas();
+
+
+        Device hotspotsById = HeliumUtils.getHotspotsById("11yhGTP2JX2Nr812Wk8F9Sn5YEpfXG3SCK79VnhYDA1hmtvHWhv");
+        BusinessHotspottyEntity businessHotspottyEntity = new BusinessHotspottyEntity();
+        businessHotspottyEntity.setAddDevice(hotspotsById);
+        businessHotspottyDao.insertSelective(businessHotspottyEntity);
+
+    }
+
+
+
+
 
 }

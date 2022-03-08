@@ -1,10 +1,10 @@
 **项目说明** 
-- renren-generator是人人开源项目的代码生成器，可在线生成entity、xml、dao、service、html、js、sql代码，减少70%以上的开发任务
+- generator是人人开源项目的代码生成器，可在线生成entity、xml、dao、service、html、js、sql代码，减少70%以上的开发任务
 <br> 
 
 
 **如何交流、反馈、参与贡献？** 
-- Git仓库：https://gitee.com/renrenio/renren-generator
+- Git仓库：https://gitee.com/renrenio/generator
 - [人人开源](https://www.renren.io)：https://www.renren.io   
 - [人人开源社区](https://www.renren.io/community)：https://www.renren.io/community   
 - 官方QQ群：324780204、145799952
