@@ -4,22 +4,22 @@
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
-    <el-form-item label="名称" prop="name">
+<!--    <el-form-item label="名称" prop="name">
       <el-input v-model="dataForm.name" placeholder="名称"></el-input>
-    </el-form-item>
+    </el-form-item>-->
     <el-form-item label="内网IP" prop="privateIp">
       <el-input v-model="dataForm.privateIp" placeholder="内网IP"></el-input>
     </el-form-item>
     <el-form-item label="公网IP" prop="publicIp">
       <el-input v-model="dataForm.publicIp" placeholder="公网IP"></el-input>
     </el-form-item>
-    <el-form-item label="品牌" prop="brand">
+<!--    <el-form-item label="品牌" prop="brand">
       <el-input v-model="dataForm.brand" placeholder="品牌"></el-input>
-    </el-form-item>
+    </el-form-item>-->
     <el-form-item label="房间" prop="room">
       <el-input v-model="dataForm.room" placeholder="房间"></el-input>
     </el-form-item>
-    <el-form-item label="设备状态" prop="online">
+<!--    <el-form-item label="设备状态" prop="online">
       <el-input v-model="dataForm.online" placeholder="设备状态"></el-input>
     </el-form-item>
     <el-form-item label="国家" prop="country">
@@ -45,7 +45,7 @@
     </el-form-item>
     <el-form-item label="钱包地址" prop="owner">
       <el-input v-model="dataForm.owner" placeholder="钱包地址"></el-input>
-    </el-form-item>
+    </el-form-item>-->
     <el-form-item label="设备地址" prop="address">
       <el-input v-model="dataForm.address" placeholder="设备地址"></el-input>
     </el-form-item>
@@ -104,48 +104,48 @@
           status: ''
         },
         dataRule: {
-          name: [
-            { required: true, message: '名称不能为空', trigger: 'blur' }
-          ],
+          // name: [
+          //   { required: true, message: '名称不能为空', trigger: 'blur' }
+          // ],
           privateIp: [
             { required: true, message: '内网IP不能为空', trigger: 'blur' }
           ],
-          publicIp: [
-            { required: true, message: '公网IP不能为空', trigger: 'blur' }
-          ],
-          brand: [
-            { required: true, message: '品牌不能为空', trigger: 'blur' }
-          ],
-          room: [
-            { required: true, message: '房间不能为空', trigger: 'blur' }
-          ],
-          online: [
-            { required: true, message: '设备状态不能为空', trigger: 'blur' }
-          ],
-          country: [
-            { required: true, message: '国家不能为空', trigger: 'blur' }
-          ],
-          city: [
-            { required: true, message: '城市不能为空', trigger: 'blur' }
-          ],
-          street: [
-            { required: true, message: '街道不能为空', trigger: 'blur' }
-          ],
-          hex: [
-            { required: true, message: 'Hex不能为空', trigger: 'blur' }
-          ],
-          total24h: [
-            { required: true, message: '24小时收益不能为空', trigger: 'blur' }
-          ],
-          total1d: [
-            { required: true, message: '7天收益不能为空', trigger: 'blur' }
-          ],
-          total30d: [
-            { required: true, message: '30天收益不能为空', trigger: 'blur' }
-          ],
-          owner: [
-            { required: true, message: '钱包地址不能为空', trigger: 'blur' }
-          ],
+          // publicIp: [
+          //   { required: true, message: '公网IP不能为空', trigger: 'blur' }
+          // ],
+          // brand: [
+          //   { required: true, message: '品牌不能为空', trigger: 'blur' }
+          // ],
+          // room: [
+          //   { required: true, message: '房间不能为空', trigger: 'blur' }
+          // ],
+          // online: [
+          //   { required: true, message: '设备状态不能为空', trigger: 'blur' }
+          // ],
+          // country: [
+          //   { required: true, message: '国家不能为空', trigger: 'blur' }
+          // ],
+          // city: [
+          //   { required: true, message: '城市不能为空', trigger: 'blur' }
+          // ],
+          // street: [
+          //   { required: true, message: '街道不能为空', trigger: 'blur' }
+          // ],
+          // hex: [
+          //   { required: true, message: 'Hex不能为空', trigger: 'blur' }
+          // ],
+          // total24h: [
+          //   { required: true, message: '24小时收益不能为空', trigger: 'blur' }
+          // ],
+          // total1d: [
+          //   { required: true, message: '7天收益不能为空', trigger: 'blur' }
+          // ],
+          // total30d: [
+          //   { required: true, message: '30天收益不能为空', trigger: 'blur' }
+          // ],
+          // owner: [
+          //   { required: true, message: '钱包地址不能为空', trigger: 'blur' }
+          // ],
           address: [
             { required: true, message: '设备地址不能为空', trigger: 'blur' }
           ],

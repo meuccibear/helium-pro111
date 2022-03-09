@@ -1,8 +1,10 @@
 package io.renren.modules.business.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import io.renren.common.gitUtils.PageRRVO;
 import io.renren.common.utils.PageUtils;
 import io.renren.modules.business.entity.BusinessHotspottyEntity;
+import io.renren.modules.domain.dto.HotspottyDTO;
 import io.renren.modules.helium.domain.Device;
 
 import java.util.Map;
@@ -20,6 +22,8 @@ public interface BusinessHotspottyService extends IService<BusinessHotspottyEnti
 
 
     void addHotsPotty(Device device);
+
+    PageRRVO getAll(HotspottyDTO hotspottyDTO);
 
 
 }

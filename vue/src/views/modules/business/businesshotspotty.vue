@@ -34,13 +34,19 @@
         align="center"
         label="名称">
       </el-table-column>
-<!--      <el-table-column
+      <el-table-column
+        prop="groupName"
+        header-align="center"
+        align="center"
+        label="分组">
+      </el-table-column>
+      <el-table-column
         prop="privateIp"
         header-align="center"
         align="center"
         label="内网IP">
       </el-table-column>
-      <el-table-column
+      <!--<el-table-column
         prop="publicIp"
         header-align="center"
         align="center"
@@ -76,7 +82,7 @@
         align="center"
         label="城市">
       </el-table-column>
-      <el-table-column
+      <!--<el-table-column
         prop="street"
         header-align="center"
         align="center"
@@ -87,7 +93,7 @@
         header-align="center"
         align="center"
         label="Hex">
-      </el-table-column>
+      </el-table-column>-->
       <el-table-column
         prop="total24h"
         header-align="center"

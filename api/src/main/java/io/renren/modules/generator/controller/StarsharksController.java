@@ -7,8 +7,10 @@ import io.renren.business.domin.ParamsBean;
 import io.renren.business.domin.starsharks.vo.StarsharksResult;
 import io.renren.business.starsharks.Market;
 import io.renren.common.gitUtils.BeanUtils;
+import io.renren.common.gitUtils.PageDTO;
 import io.renren.common.utils.PageUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,14 +31,16 @@ public class StarsharksController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
-    @RequiresPermissions("generator:starsharks:list")
-    public R list(@RequestParam Map<String, Object> params) {
-        ParamsBean paramsBean = BeanUtils.toJavaObject(params, new TypeReference<ParamsBean>() {
-        });
-        StarsharksResult starsharksResult = new Market().starsharks(paramsBean.getPage(), paramsBean.getLimit());
-        PageUtils page = new PageUtils(starsharksResult.getSharkList(), starsharksResult.getTotal_count(), starsharksResult.getTotal_page(), starsharksResult.getCurr_page());
-        return R.ok().put("page", page);
-    }
+//    @RequestMapping("/list")
+//    @RequiresPermissions("generator:starsharks:list")
+////    public R list(@RequestParam Map<String, Object> params) {
+//    public R list(@ModelAttribute PageDTO params) {
+////        ParamsBean paramsBean = BeanUtils.toJavaObject(params, new TypeReference<ParamsBean>() {
+////        });
+//        StarsharksResult starsharksResult = new Market().starsharks(params.getPage(), params.getLimit());
+//        PageUtils page = new PageUtils(starsharksResult.getSharkList(), starsharksResult.getTotal_count(),
+//                starsharksResult.getTotal_page(), starsharksResult.getCurr_page());
+//        return R.ok().put("page", page);
+//    }
 
 }

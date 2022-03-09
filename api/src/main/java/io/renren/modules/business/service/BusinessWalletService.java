@@ -1,11 +1,12 @@
 package io.renren.modules.business.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import io.renren.common.gitUtils.PageRRVO;
 import io.renren.common.gitUtils.exception.MsgException;
 import io.renren.common.utils.PageUtils;
 import io.renren.modules.business.entity.BusinessWalletEntity;
+import io.renren.modules.domain.dto.WalletDTO;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,18 +20,23 @@ public interface BusinessWalletService extends IService<BusinessWalletEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
 
+    PageRRVO getAll(WalletDTO walletDTO);
 
     /**
      *
      * @param userId
      */
-    void crawlingData(Long userId) throws MsgException;
-
-    void crawlingDatas();
+    void crawlingWallData(Long userId) throws MsgException;
 
     /**
      *
      */
+    void crawlingWallData() throws MsgException;
+
+    void crawlingDatas();
+
+    void crawlingData(Long userId) throws MsgException;
+
     void crawlingData() throws MsgException;
 
 }

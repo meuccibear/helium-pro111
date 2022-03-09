@@ -4,14 +4,12 @@ import java.util.*;
 
 import com.alibaba.fastjson.JSON;
 import io.renren.common.gitUtils.ObjectUtils;
+import io.renren.common.gitUtils.PageRRVO;
+import io.renren.modules.domain.dto.WalletDTO;
 import io.renren.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import io.renren.modules.business.entity.BusinessWalletEntity;
 import io.renren.modules.business.service.BusinessWalletService;
 import io.renren.common.utils.PageUtils;
@@ -34,11 +32,17 @@ public class BusinessWalletController extends AbstractController {
     /**
      * 列表
      */
+//    @RequestMapping("/list")
+//    @RequiresPermissions("business:businesswallet:list")
+//    public R list(@RequestParam Map<String, Object> params) {
+//        PageUtils page = businessWalletService.queryPage(params);
+//
+//        return R.ok().put("page", page);
+//    }
     @RequestMapping("/list")
     @RequiresPermissions("business:businesswallet:list")
-    public R list(@RequestParam Map<String, Object> params) {
-        PageUtils page = businessWalletService.queryPage(params);
-
+    public R list(@ModelAttribute WalletDTO walletDTO) {
+        PageRRVO page = businessWalletService.getAll(walletDTO);
         return R.ok().put("page", page);
     }
 

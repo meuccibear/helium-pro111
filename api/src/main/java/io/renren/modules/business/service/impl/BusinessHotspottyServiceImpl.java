@@ -1,9 +1,13 @@
 package io.renren.modules.business.service.impl;
 
 import io.renren.common.gitUtils.ObjectUtils;
+import io.renren.common.gitUtils.PageRRVO;
+import io.renren.modules.business.entity.HotspottyEntity;
+import io.renren.modules.domain.dto.HotspottyDTO;
 import io.renren.modules.helium.domain.Device;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -45,6 +49,13 @@ public class BusinessHotspottyServiceImpl extends ServiceImpl<BusinessHotspottyD
             businessHotspotty.setHotspottyId(null);
             baseMapper.insertSelective(businessHotspotty);
         }
+    }
+
+    @Override
+    public PageRRVO getAll(HotspottyDTO hotspottyDTO) {
+        List<HotspottyEntity> hotspottyEntities = baseMapper.findAllByOwnerAndCreateUserId(hotspottyDTO);
+        int totalCount = baseMapper.findAllByOwnerAndCreateUserIdCount(hotspottyDTO);
+        return PageRRVO.build(hotspottyDTO, hotspottyEntities, totalCount);
     }
 
 }

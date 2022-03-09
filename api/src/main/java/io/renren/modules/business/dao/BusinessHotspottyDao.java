@@ -1,4 +1,6 @@
 package io.renren.modules.business.dao;
+import io.renren.modules.business.entity.HotspottyEntity;
+import io.renren.modules.domain.dto.HotspottyDTO;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -16,8 +18,14 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface BusinessHotspottyDao extends BaseMapper<BusinessHotspottyEntity> {
 
+    List<HotspottyEntity> findAllByOwnerAndCreateUserId(HotspottyDTO hotspottyDTO);
+
+    Integer findAllByOwnerAndCreateUserIdCount(HotspottyDTO hotspottyDTO);
+
     Long findHotspottyIdByAddress(@Param("address")String address);
 
     int insertSelective(BusinessHotspottyEntity businessHotspottyEntity);
+
+    List<BusinessHotspottyEntity> findAll();
 
 }

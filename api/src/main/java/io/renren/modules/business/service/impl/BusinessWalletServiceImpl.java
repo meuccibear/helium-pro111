@@ -1,8 +1,12 @@
 package io.renren.modules.business.service.impl;
 
-import com.alibaba.fastjson.JSON;
+import io.renren.common.gitUtils.PageRRVO;
 import io.renren.common.gitUtils.exception.MsgException;
+import io.renren.modules.business.dao.BusinessHotspottyDao;
+import io.renren.modules.business.entity.BusinessHotspottyEntity;
+import io.renren.modules.business.entity.HotspottyEntity;
 import io.renren.modules.business.service.BusinessHotspottyService;
+import io.renren.modules.domain.dto.WalletDTO;
 import io.renren.modules.helium.HeliumUtils;
 import io.renren.modules.helium.domain.Device;
 import org.slf4j.Logger;
@@ -19,7 +23,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.Query;
-
 import io.renren.modules.business.dao.BusinessWalletDao;
 import io.renren.modules.business.entity.BusinessWalletEntity;
 import io.renren.modules.business.service.BusinessWalletService;
@@ -31,6 +34,8 @@ public class BusinessWalletServiceImpl extends ServiceImpl<BusinessWalletDao, Bu
 
     @Autowired
     BusinessHotspottyService businessHotspottyService;
+    @Autowired
+    BusinessHotspottyDao businessHotspottyDao;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -38,11 +43,13 @@ public class BusinessWalletServiceImpl extends ServiceImpl<BusinessWalletDao, Bu
                 new Query<BusinessWalletEntity>().getPage(params),
                 new QueryWrapper<BusinessWalletEntity>()
         );
-
         PageUtils pageUtils = new PageUtils(page);
-
-        System.out.println(JSON.toJSONString(pageUtils));
         return pageUtils;
+    }
+
+    @Override
+    public void crawlingWallData() throws MsgException {
+        crawlingWallData(null);
     }
 
     @Override
@@ -51,7 +58,7 @@ public class BusinessWalletServiceImpl extends ServiceImpl<BusinessWalletDao, Bu
     }
 
     @Override
-    public void crawlingData(Long userId) throws MsgException {
+    public void crawlingWallData(Long userId) throws MsgException {
         List<BusinessWalletEntity> wallets = baseMapper.findAllByCreateUserId(userId);
         List<Device> devices = new ArrayList<>();
         for (BusinessWalletEntity wallet : wallets) {
@@ -62,6 +69,23 @@ public class BusinessWalletServiceImpl extends ServiceImpl<BusinessWalletDao, Bu
                 device.setTotal(HeliumUtils.getHotspotsTotal(2, device.getAddress()));
                 businessHotspottyService.addHotsPotty(device);
             }
+        }
+    }
+
+    @Override
+    public void crawlingData(Long userId) throws MsgException {
+        List<BusinessHotspottyEntity> all = businessHotspottyDao.findAll();
+        Device device;
+        BusinessHotspottyEntity hotspotty;
+        for (BusinessHotspottyEntity businessHotspottyEntity : all) {
+            device = HeliumUtils.getHotspotsById(businessHotspottyEntity.getAddress());
+
+            device.setCreateUserId(businessHotspottyEntity.getCreateUserId());
+            device.setTotal(HeliumUtils.getHotspotsTotal(2, device.getAddress()));
+
+            hotspotty = new BusinessHotspottyEntity();
+            hotspotty.setUpdateDevice(businessHotspottyEntity.getHotspottyId(), device);
+            businessHotspottyService.updateById(hotspotty);
         }
     }
 
@@ -89,6 +113,12 @@ public class BusinessWalletServiceImpl extends ServiceImpl<BusinessWalletDao, Bu
 //                    e.printStackTrace();
             }
         }
+    }
+
+
+    @Override
+    public PageRRVO getAll(WalletDTO walletDTO) {
+        return PageRRVO.build(walletDTO, baseMapper.findAll(walletDTO), baseMapper.findAllCount(walletDTO));
     }
 
 }

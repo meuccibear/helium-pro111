@@ -1,5 +1,7 @@
 package io.renren.modules.business.dao;
 import io.renren.modules.business.dao.FindOwnerAndCreateUserIdByCreateUserIdResult;
+import io.renren.modules.business.entity.WalletEntity;
+import io.renren.modules.domain.dto.WalletDTO;
 import org.apache.ibatis.annotations.Param;
 
 import io.renren.modules.business.entity.BusinessGroupEntity;
@@ -25,8 +27,10 @@ public interface BusinessWalletDao extends BaseMapper<BusinessWalletEntity> {
 
     List<BusinessWalletEntity> findAllByCreateUserId(@Param("createUserId")Long createUserId);
 
+    List<WalletEntity> findAll(WalletDTO walletDTO);
+
+    Integer findAllCount(WalletDTO walletDTO);
 
     int updateOwnerByOwner(@Param("updatedOwner")String updatedOwner,@Param("owner")String owner);
-
 
 }

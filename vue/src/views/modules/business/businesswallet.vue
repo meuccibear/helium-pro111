@@ -29,7 +29,7 @@
         label="编号">
       </el-table-column>
       <el-table-column
-        prop="groupId"
+        prop="groupName"
         header-align="center"
         align="center"
         label="分组">
